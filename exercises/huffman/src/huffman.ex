@@ -170,7 +170,24 @@ defmodule Huffman do
         {list, length}
     end
   end
+  def character_decode(binary, length, :utf24) do
+    {bytes_to_list(binary, 24), length - rem(length,3)}
+  end
+     
 
+  def bytes_to_list(binary, s) do
+    case binary do
+      <<char :: size(s), rest :: binary>> ->
+	[char|bytes_to_list(rest, s)];
+      _ ->
+	[]
+    end
+  end
+  
+
+  
+
+  
   # This is the benchmark of the single operations in the
   # Huffman encoding and decoding process.
   def bench(n, coding) do

@@ -18,9 +18,10 @@ defmodule Morse do
     decode(signal, short, table)
   end
   def decode([?\s | signal], {:node, :na, _, _}, table) do
+    ## an error, let's ignore it 
     decode(signal, table, table)
   end
-  def decode([_ | signal], {:node, char, _, _}, table) do
+  def decode([?\s | signal], {:node, char, _, _}, table) do
     [char | decode(signal, table, table)]
   end
 
